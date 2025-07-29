@@ -8,5 +8,6 @@ body{
 }
 @theme{
     --color-lightgreyy: hsl(7, 86%, 67%) to hsl(0, 0%, 100%);
+    --breakpoint-xs: 320px;
 }
 
