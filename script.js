@@ -63,11 +63,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const ticketFormData = new FormData(ticketForm);
 
     const userFullName = ticketFormData.get('fullName');
+    const validUserName = userFullName.trim().split(" ").filter(Boolean);
+    for(let i = 0; i < validUserName.length; i++){
+      const wordName = validUserName[i];
+      validUserName[i] =  wordName[0].toUpperCase() + wordName.slice(1).toLowerCase();
+    }
+    const capitalizedValidUserName = validUserName.join(" ");
     const userEmailValue = ticketFormData.get('email');
     const userGithubUserName = ticketFormData.get('githubUserName');
 
     const userEmailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z]+\.[a-zA-Z]+$/;
-    const validEmail = userEmailRegex.test(userEmailValue.trim());
+    // const userEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+     //Ensuring the email is always coverted to lowercase
+    const validEmail = userEmailRegex.test(userEmailValue.trim().toLowerCase());
 
     let formIsValid = true;
 
@@ -89,12 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (!formIsValid) return;
-    
+
     //saving user details to a local storage
     const imageReader = new FileReader();
     imageReader.onload = function () {
         const userTicketDetails = {
-        fullName: userFullName,
+        fullName: capitalizedValidUserName,
         email:userEmailValue,
         githubUserName: userGithubUserName,
         image: imageReader.result
