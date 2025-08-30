@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const file = userImage.files[0];
     const fileSizeKB = Math.round(file.size / 1024);
 
-    if (fileSizeKB > 500) {
+    if (fileSizeKB > 5000) {
       uploadError.classList.remove('hidden');
       uploadInstruction.classList.add('hidden');
       return;
